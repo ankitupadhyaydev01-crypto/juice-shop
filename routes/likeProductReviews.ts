@@ -22,7 +22,8 @@ export function likeProductReviews () {
     }
 
     try {
-      const review = await db.reviewsCollection.findOne({ _id: id })
+import { objectId } from ' mongodb';
+      const review = await db.reviewsCollection.findOne({ _id: new ObjectId (id) });
       if (!review) {
         return res.status(404).json({ error: 'Not found' })
       }

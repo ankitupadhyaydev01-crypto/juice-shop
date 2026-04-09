@@ -32,7 +32,11 @@ import { objectId } from ' mongodb';
       if (likedBy.includes(user.data.email)) {
         return res.status(403).json({ error: 'Not allowed' })
       }
+const {ObjectId } = require ('mangodb' )
 
+      if (!ObjectId.isValid (id)) {
+        throw new Error ( "invalid review ID" );km
+      }
       await db.reviewsCollection.updateOne(
         { _id: id },
         { $inc: { likesCount: 1 } }

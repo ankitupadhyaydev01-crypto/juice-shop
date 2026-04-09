@@ -33,10 +33,10 @@ import { objectId } from ' mongodb';
         return res.status(403).json({ error: 'Not allowed' })
       }
 
-      await db.reviewsCollection.update(
+      await db.reviewsCollection.updateOne(
         { _id: id },
         { $inc: { likesCount: 1 } }
-      )
+      );
 
       // Artificial wait for timing attack challenge
       await sleep(150)

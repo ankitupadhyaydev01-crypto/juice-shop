@@ -22,13 +22,19 @@ export function likeProductReviews () {
     }
 
     try {
-import { objectId } from ' mongodb';
-      const review = await db.reviewsCollection.findOne({ _id: new ObjectId (id) });
-      if (!review) {
-        return res.status(404).json({ error: 'Not found' })
+import { objectId } from  "mongodb";
+      if (!objectId. isValid (id)) {
+        return res.status(400) .json {( message: "Invalid Id")};
       }
-
-      const likedBy = review.likedBy
+      const review = await db.reviewsCollection.findOne({
+        _id: new ObjectId(id),
+        userId : req.user._id
+          )};
+      if (!review) {
+        return res.status(404).json({ message: "Review not found" });
+      }
+      
+    const likedBy = review.likedBy
       if (likedBy.includes(user.data.email)) {
         return res.status(403).json({ error: 'Not allowed' })
       }
